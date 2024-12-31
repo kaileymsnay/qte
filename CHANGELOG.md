@@ -32,3 +32,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 - Remove version from database
 - Allow topic authors to remove attributes from topics
+
+## 1.0.2
+
+- Fix translation issue with logs
+- Throw an error if a user deletes an attribute without permissions
