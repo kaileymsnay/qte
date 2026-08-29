@@ -355,11 +355,17 @@ class main_listener implements EventSubscriberInterface
 	// MCP
 	public function mcp_forum_view_before($event)
 	{
-		$attr_id = (int) $this->request->variable('attr_id', 0);
+		add_form_key('qte_mcp_attr_apply', '_QTE');
+		$attr_id = (int) $this->request->variable('attr_id', 0, false, \phpbb\request\request_interface::POST);
 		$forum_id = (int) $event['forum_info']['forum_id'];
 
 		if ($attr_id)
 		{
+			if (!check_form_key('qte_mcp_attr_apply'))
+			{
+				trigger_error($this->language->lang('FORM_INVALID'));
+			}
+
 			$this->qte->mcp_attr_apply($attr_id, $forum_id, $event['topic_id_list']);
 		}
 
@@ -635,6 +641,11 @@ class main_listener implements EventSubscriberInterface
 
 		if ($attr_id)
 		{
+			if (!check_link_hash($this->request->variable('hash', ''), 'qte_attr_apply'))
+			{
+				return;
+			}
+
 			$this->qte->get_users_by_user_id($this->user->data['user_id']);
 			$this->qte->attr_apply($attr_id, $event['topic_id'], $event['forum_id'], $event['topic_data']['topic_attr_id'], $event['topic_data']['topic_poster'], $event['viewtopic_url']);
 		}

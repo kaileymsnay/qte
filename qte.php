@@ -181,7 +181,7 @@ class qte
 					'S_SELECTED'	=> (!empty($attribute_id) && ($attr['attr_id'] == $attribute_id)) ? true : false,
 					'S_QTE_DESC'	=> !empty($attr['attr_desc']) ? true : false,
 
-					'U_QTE_URL'	=> !empty($viewtopic_url) ? append_sid($viewtopic_url, ['attr_id' => $attr['attr_id']]) : false,
+					'U_QTE_URL'	=> !empty($viewtopic_url) ? append_sid($viewtopic_url, ['attr_id' => $attr['attr_id'], 'hash' => generate_link_hash('qte_attr_apply')]) : false,
 				]);
 			}
 		}
@@ -193,7 +193,7 @@ class qte
 			'S_QTE_SELECTED'	=> ($s_delete && ($attribute_id == self::DELETE)) ? true : false,
 			'S_QTE_KEEP'		=> !empty($attribute_id) && ($attribute_id == self::KEEP) ? true : false,
 
-			'U_QTE_URL'	=> !empty($viewtopic_url) ? append_sid($viewtopic_url, ['attr_id' => self::DELETE]) : false,
+			'U_QTE_URL'	=> !empty($viewtopic_url) ? append_sid($viewtopic_url, ['attr_id' => self::DELETE, 'hash' => generate_link_hash('qte_attr_apply')]) : false,
 		]);
 	}
 
