@@ -391,26 +391,13 @@ class qte
 
 		if ($this->request->is_ajax())
 		{
-
-/*
-	 * Rebuild the QTE menu using the state after the database update.
-	 *
-	 * DELETE is represented by -1 in the request, but attr_select()
-	 * expects 0 to represent an empty/no attribute state.
-	 */
-	$menu_attribute_id = ($attribute_id == self::DELETE) ? 0 : $attribute_id;
-
-	$this->qte_menu($forum_id, $author_id, $menu_attribute_id, $viewtopic_url);
-
 			$json_response = new \phpbb\json_response;
-
 			$json_response->send([
 				'success'	=> true,
 
 				'MESSAGE_TITLE'	=> $this->language->lang('INFORMATION'),
 				'MESSAGE_TEXT'	=> $message,
 				'NEW_ATTRIBUTE'	=> $this->attr_display($attribute_id, $this->user->data['user_id'], $current_time),
-				'QTE_MENU'		=> $this->template->assign_display('qte_menu'),
 			]);
 		}
 
@@ -418,28 +405,6 @@ class qte
 
 		trigger_error($message);
 	}
-
-/**
- * Generate the QTE menu for AJAX responses.
- */
-public function qte_menu($forum_id, $author_id = 0, $attribute_id = 0, $viewtopic_url = '')
-{
-	/*
-	 * attr_apply() runs in a fresh HTTP request, so the template
-	 * context does not contain the attributes from the normal
-	 * viewtopic page. Populate it using the new state.
-	 */
-	$this->attr_select(
-		$forum_id,
-		$author_id,
-		$attribute_id,
-		$viewtopic_url
-	);
-
-	$this->template->set_filenames([
-		'qte_menu' => 'qte_menu.html',
-	]);
-}
 
 	/**
 	 * Change topic attribute in mcp
