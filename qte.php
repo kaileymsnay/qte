@@ -392,15 +392,6 @@ class qte
 		if ($this->request->is_ajax())
 		{
 
-
-
-
-
-
-
-
-
-
 /*
 	 * Rebuild the QTE menu using the state after the database update.
 	 *
@@ -410,15 +401,6 @@ class qte
 	$menu_attribute_id = ($attribute_id == self::DELETE) ? 0 : $attribute_id;
 
 	$this->qte_menu($forum_id, $author_id, $menu_attribute_id, $viewtopic_url);
-
-
-
-
-
-
-
-
-
 
 			$json_response = new \phpbb\json_response;
 
