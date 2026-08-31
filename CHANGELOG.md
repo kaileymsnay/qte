@@ -47,3 +47,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 - Fix images repeating
 - Fix image positioning
+- Fix possible CSRF vulnerability
+- File cosmetic fixes (spacing, new lines)
