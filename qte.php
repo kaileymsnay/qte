@@ -459,15 +459,6 @@ public function qte_menu($forum_id, $author_id = 0, $attribute_id = 0, $viewtopi
 	]);
 }
 
-
-
-
-
-
-
-
-
-
 	/**
 	 * Change topic attribute in mcp
 	 */
