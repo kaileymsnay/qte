@@ -26,14 +26,23 @@
 			$('h2.topic-title').html($('h2.topic-title a'));
 		}
 
-		/*
-		 * Replace the QTE menu
-		 */
-		if (data.QTE_MENU) {
+		if (typeof data.QTE_MENU !== 'undefined') {
+
 			var menu = $('.qte-menu');
 
-			if (menu.length) {
-				menu.replaceWith(data.QTE_MENU);
+			if (data.QTE_MENU) {
+
+				if (menu.length) {
+					menu.replaceWith(data.QTE_MENU);
+				}
+
+			}
+			else if (menu.length) {
+
+				/*
+				 * No menu should exist in the new state.
+				 */
+				menu.remove();
 			}
 		}
 
