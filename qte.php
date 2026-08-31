@@ -391,6 +391,35 @@ class qte
 
 		if ($this->request->is_ajax())
 		{
+
+	/*
+	 * Rebuild the QTE menu using the new topic attribute state.
+	 *
+	 * attr_select() normally runs during page generation. Since this
+	 * request is AJAX, we need to rebuild its template variables here
+	 * so S_QTE_EMPTY, S_QTE_DELETE, U_QTE_URL and the attributes loop
+	 * reflect the change that was just made.
+	 */
+	$this->template->destroy_block_vars('attributes');
+
+	$menu_attribute_id = ($attribute_id == self::DELETE) ? 0 : $attribute_id;
+
+	$this->attr_select(
+		$forum_id,
+		$author_id,
+		$menu_attribute_id,
+		$viewtopic_url
+	);
+
+	/*
+	 * Render the menu template into a string for the AJAX response.
+	 */
+	$this->template->set_filenames([
+		'qte_menu' => 'qte_menu.html',
+	]);
+
+	$qte_menu = $this->template->assign_display('qte_menu');
+
 			$json_response = new \phpbb\json_response;
 			$json_response->send([
 				'success'	=> true,
@@ -398,6 +427,7 @@ class qte
 				'MESSAGE_TITLE'	=> $this->language->lang('INFORMATION'),
 				'MESSAGE_TEXT'	=> $message,
 				'NEW_ATTRIBUTE'	=> $this->attr_display($attribute_id, $this->user->data['user_id'], $current_time),
+				'QTE_MENU'		=> $qte_menu,
 			]);
 		}
 

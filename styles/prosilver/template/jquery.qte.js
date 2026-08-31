@@ -26,6 +26,17 @@
 			$('h2.topic-title').html($('h2.topic-title a'));
 		}
 
+		/*
+		 * Replace the QTE menu
+		 */
+		if (data.QTE_MENU) {
+			var menu = $('.qte-menu');
+
+			if (menu.length) {
+				menu.replaceWith(data.QTE_MENU);
+			}
+		}
+
 		phpbb.closeDarkenWrapper(3000);
 	});
 
